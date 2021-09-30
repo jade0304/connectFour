@@ -18,18 +18,19 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 function makeBoard() {
 for (let y = 0; y < height; y++) {
 board.push(Array.from({length: width}));
+
 }
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
-function makeHtmlBoard() {
+const makeHtmlBoard = () => {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   const board = document.getElementById("board");
   // TODO: add comment for this code
   // create top row column to drop piece for player1 and player2
   let top = document.createElement("tr");
-  top.setAttribute("id", "column-top");
+  top.setAttribute("id", "column-top")
   top.addEventListener("click", handleClick);
 
   for (let x = 0; x < width; x++) {
@@ -54,7 +55,7 @@ function makeHtmlBoard() {
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
-function findSpotForCol(x) {
+const findSpotForCol = x => {
   // TODO: write the real version of this, rather than always returning 0
   for (let y = height - 1; y >= 0; y--) {
     if (!board[y][x]) {
@@ -66,7 +67,7 @@ function findSpotForCol(x) {
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
-function placeInTable(y, x) {
+const placeInTable = (y, x) => {
   // TODO: make a div and insert into correct table cell
   const piece = document.createElement("div");
   piece.classList.add("piece");
@@ -79,14 +80,14 @@ function placeInTable(y, x) {
 
 /** endGame: announce game end */
 
-function endGame(msg) {
-  // TODO: pop up alert message
-  alert(msg);
-}
+// TODO: pop up alert message
+const endGame = msg => alert(msg);
+
+
 
 /** handleClick: handle click of column top to play piece */
 
-function handleClick(evt) {
+const handleClick = evt => {
   // get x from ID of clicked cell
   const x = +evt.target.id;
 
@@ -119,8 +120,8 @@ function handleClick(evt) {
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
-function checkForWin() {
-  function _win(cells) {
+const checkForWin = () => {
+  const _win = cells => {
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
@@ -175,9 +176,3 @@ function checkForWin() {
 makeBoard();
 makeHtmlBoard();
 
-function restartGame() {
-  document.querySelector('#btnRestart').addEventListener('click', function(){
-    window.location.reload();
-    return false;
-  });
-}
